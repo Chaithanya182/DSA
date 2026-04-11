@@ -1,0 +1,132 @@
+🟢 ARRAYS (MOST IMPORTANT)
+Traversal → Basic loops
+Max / Min → Track variable
+Subarray sum → Prefix Sum
+Subarray count → Prefix + HashMap
+Max subarray → Kadane
+Pair sum → Hash / Two pointer
+Sorted array → Binary search / Two pointer
+Rearrangement → Two pointer
+Majority → Boyer-Moore
+Rotate array → Reversal
+
+
+🟡 STRINGS
+Substring problems → Sliding Window
+Anagrams → Frequency array / HashMap
+Palindrome → Two pointer
+Pattern matching → Hashing / KMP (advanced)
+Count substrings → Sliding window / Prefix
+No repeating chars → Sliding window + Set
+
+
+🔵 SLIDING WINDOW (SUBTYPE but VERY IMPORTANT)
+Fixed size window → Simple sliding window
+Variable window → Two pointer + while loop
+At most K → Sliding window
+Exactly K → At most K - At most (K-1)
+Longest/shortest → Sliding window
+
+
+🟣 HASHING
+Frequency count → HashMap
+Pair problems → HashMap
+Subarray count → Prefix + HashMap
+Duplicates → Set
+Lookup fast → HashMap
+
+
+🟠 TWO POINTER
+Sorted array → Two pointer
+Pair sum → Two pointer
+Remove duplicates → Two pointer
+Merge arrays → Two pointer
+Partition → Two pointer
+
+
+🔴 BINARY SEARCH
+Sorted array → Binary search
+Find position → Binary search
+Search space → Binary search on answer
+Min/max possible → Binary search
+Peak element → Binary search
+
+
+🟤 STACK
+Next greater/smaller → Monotonic stack
+Histogram → Stack
+Span problems → Stack
+Expression eval → Stack
+Balanced brackets → Stack
+
+
+⚫ QUEUE
+Level order → Queue
+BFS → Queue
+Sliding window max → Deque
+
+
+
+⚪ HEAP (PRIORITY QUEUE)
+Kth largest/smallest → Heap
+Top K elements → Heap
+Merge k arrays/lists → Heap
+Median → Two heaps
+
+
+🌳 TREES
+Traversal → DFS (in/pre/post)
+Level order → BFS
+Height/depth → Recursion
+Path problems → DFS
+Diameter → DFS
+Balanced tree → DFS
+
+
+
+🌐 GRAPHS
+Traversal → BFS / DFS
+Shortest path → BFS / Dijkstra
+Cycle detection → DFS / BFS
+Topological sort → DFS / BFS
+Connected components → DFS
+Grid problems → BFS/DFS
+
+
+
+🧠 DYNAMIC PROGRAMMING (VERY IMPORTANT)
+Overlapping subproblems → DP
+Choices → DP
+Min/max result → DP
+Count ways → DP
+Knapsack → DP
+Subsequence → DP
+Partition → DP
+
+
+
+🧩 GREEDY
+Intervals → Sort + Greedy
+Activity selection → Greedy
+Min coins → Greedy
+Jump problems → Greedy
+
+
+
+🔥 BIT MANIPULATION
+Single number → XOR
+Power of 2 → Bit check
+Count bits → Bit tricks
+Subset generation → Bit masking
+
+
+
+🎯 SUPER SUMMARY (1-LINE PER TOPIC)
+Arrays → Prefix / Kadane / Two pointer
+Strings → Sliding window / Hashing
+DP → Choices + Overlap
+Graphs → BFS/DFS
+Trees → DFS/BFS
+Heap → K elements
+Stack → Next greater
+Binary Search → Sorted / Answer space

@@ -1,0 +1,120 @@
+KEY NOTES FOR ARRAY REVISION - Day 12-14
+===============================================
+
+PROBLEM RECOGNITION CHEAT SHEET:
+
+1. LARGEST/SECOND LARGEST
+   ✓ Single pass, keep track of max and second max
+   ✓ Watch for: SecondMax != Max check
+
+2. SORTED ARRAY CHECK
+   ✓ Simple comparison: arr[i] > arr[i+1] -> not sorted
+   ✓ Early termination when found
+
+3. REMOVE DUPLICATES FROM SORTED
+   ✓ Two pointers: one for unique position, one for iteration
+   ✓ Returns count of unique elements
+   ✓ Key: Only works on sorted array
+
+4. LEFT ROTATE BY ONE
+   ✓ Store first element, shift all left, put first at end
+   ✓ Time: O(n), Space: O(1)
+
+5. LEFT ROTATE BY K
+   ✓ REVERSE METHOD: reverse[0:k], reverse[k:n], reverse all
+   ✓ Key: k = k % arr.length (handle k > n)
+   ✓ Never iterative shift (will TLE for large k)
+
+6. MOVE ZEROS TO END
+   ✓ Two pointers: nonZeroPos tracks where to place next non-zero
+   ✓ Only swap when necessary
+   ✓ Maintains relative order of non-zero elements
+
+7. LINEAR SEARCH
+   ✓ Iterate and compare
+   ✓ Return index or -1
+   ✓ Works on unsorted arrays
+
+8. UNION OF SORTED ARRAYS
+   ✓ Two pointers, pick smaller
+   ✓ Skip duplicates: check last added element
+   ✓ Don't forget remaining elements after one array exhausted
+
+9. FIND MISSING NUMBER
+   ✓ **SUM METHOD**: sum(1 to n) - sum(arr)
+   ✓ **XOR METHOD**: XOR all 1 to n, XOR all arr elements
+   ✓ XOR better: avoids overflow issues
+
+10. MAXIMUM CONSECUTIVE ONES
+    ✓ Counter approach: reset on 0, update max on 1
+    ✓ Track both current and max count
+    ✓ Similar pattern for max consecutive anything
+
+11. SINGLE NUMBER (appears once, rest twice)
+    ✓ **USE XOR**: a XOR a = 0, remaining is answer
+    ✓ OPTIMAL: Time O(n), Space O(1)
+    ✓ KEY INSIGHT: XOR properties make this elegant
+
+12. LONGEST SUBARRAY SUM K (POSITIVES ONLY)
+    ✓ Two pointers: expand right, shrink left
+    ✓ If sum == k: update max
+    ✓ If sum < k: add right
+    ✓ If sum > k: remove left
+
+13. LONGEST SUBARRAY SUM K (WITH NEGATIVES)
+    ✓ **HASHMAP + PREFIX SUM**
+    ✓ Store prefix_sum -> earliest_index
+    ✓ Check if (prefix_sum - k) exists
+    ✓ Time: O(n), Space: O(n)
+
+14. SORT 0s, 1s, 2s (DUTCH FLAG)
+    ✓ Three pointers: low (0s), mid (1s), high (2s)
+    ✓ Algorithm:
+      - arr[mid] == 0: swap(mid, low), low++, mid++
+      - arr[mid] == 1: mid++
+      - arr[mid] == 2: swap(mid, high), high--
+    ✓ Only one pass needed
+
+15. MAJORITY ELEMENT > n/2
+    ✓ **BOYER-MOORE VOTING**: Time O(n), Space O(1)
+    ✓ Find candidate: count==0 pick new, else count++/-
+    ✓ Verify: count occurrences > n/2
+    ✓ ALWAYS DO VERIFICATION STEP
+
+================== QUICK PATTERN REFERENCE ====================
+
+| Problem Type | Pattern | Time | Space | Key Trick |
+|---|---|---|---|---|
+| Sorted pairs | Two Pointers | O(n) | O(1) | Compare & move |
+| Subarray sum | Prefix Sum | O(n) | O(n) | HashMap |
+| Window | Sliding Window | O(n) | O(1) | Expand/Shrink |
+| Rotation | Reversal | O(n) | O(1) | Reverse blocks |
+| Single element | XOR | O(n) | O(1) | Commutative |
+| Sorted 0,1,2 | Three Pointers | O(n) | O(1) | Dutch Flag |
+| Majority | Boyer-Moore | O(n) | O(1) | Voting |
+
+================== COMMON MISTAKES ====================
+
+❌ Left rotate by k: Using iterative shift (TLE for large k)
+❌ Remove duplicates: Trying on unsorted array
+❌ Two pointer: Wrong direction or comparison logic
+❌ Majority element: Not verifying candidate
+❌ Subarray sum: Forgetting prefix_sum - k lookup
+❌ Union: Not skipping duplicates
+
+✓ ALWAYS CHECK: Edge cases, empty arrays, n=1, n=2
+
+================== COMPLEXITY QUICK REFERENCE ====================
+
+OPTIMAL APPROACHES:
+- Find largest/second: O(n) time, O(1) space - single pass
+- Rotate by k: O(n) time, O(1) space - reversal method
+- Longest subarray sum: O(n) time, O(n) space - prefix sum with map
+- Sort 0,1,2: O(n) time, O(1) space - three pointer Dutch Flag
+- Majority element: O(n) time, O(1) space - Boyer-Moore
+- Move zeros: O(n) time, O(1) space - two pointer swap
+
+AVOID (unless required):
+- HashMap for every problem (uses O(n) space)
+- Nested loops (usually O(n²))
+- Creating new arrays when in-place works
