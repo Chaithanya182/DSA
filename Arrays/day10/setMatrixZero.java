@@ -1,3 +1,10 @@
+// Set Matrix Zeroes Key Note:
+// - Use first row and first column as markers for rows/columns that should be zeroed
+// - First scan marks zeros in matrix[0][j] and matrix[i][0]
+// - Second scan updates remaining cells based on those markers
+// - Then zero out the first row/column if needed
+// - Time: O(m*n), Space: O(1)
+
 class Solution {
     public void setZeroes(int[][] matrix) {
     

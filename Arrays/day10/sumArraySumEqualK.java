@@ -1,8 +1,14 @@
+// Subarray Sum Equals K Key Note:
+// - Use prefix sum and a HashMap to count how many times each prefix sum occurs
+// - For current prefix sum x, number of subarrays ending here with sum k is count(x - k)
+// - Time: O(n), Space: O(n)
+// - Key trick: store prefix sums while iterating and update counts as you go
+
 import java.util.*;
 class Solution {
     // Function to find count of subarrays with sum equal to k
     public int subarraySum(int[] arr, int k) {
-        
+
         //concept use prefix sum and count all possible sub arrays of having
         // x-k and intution is to consider current prefix sum is x and we should find no of accourences of x-k till now so x - k + k = x =so we will find it and store every occurence of prefix sum in map
         

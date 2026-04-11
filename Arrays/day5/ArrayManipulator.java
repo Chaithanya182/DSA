@@ -1,3 +1,9 @@
+// Alternate Positive and Negative Key Note:
+// - Separate positives and negatives first, then merge them alternately
+// - If one list is longer, append remaining values at the end
+// - Time: O(n), Space: O(n)
+// - Useful when relative order can be preserved by collecting elements first
+
 import java.util.*;
 
 class ArrayManipulator {

@@ -1,3 +1,9 @@
+// Leaders in Array Key Note:
+// - A leader is greater than all elements to its right
+// - Scan from right to left, tracking the maximum seen so far
+// - When current element > maxSoFar, it's a leader
+// - Time: O(n), Space: O(n) for result list
+
 import java.util.*;
 
 class Solution {

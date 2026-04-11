@@ -1,3 +1,15 @@
+// Pascal's Triangle Key Note:
+// - Each row builds on the previous row by summing adjacent values
+// - Row 0 is [1]; row i has i+1 elements
+// - First and last values are always 1
+// - Use the previous row to compute the current row in O(rowNum) time
+
+// Pascal's Triangle Key Note:
+// - Each row builds on the previous row by summing adjacent values
+// - Row 0 is [1]; row i has i+1 elements
+// - First and last values are always 1
+// - Use the previous row to compute the next row in O(rowNum) time
+
 import java.util.*;
 class Solution {
     public List<Integer> generateRow(int rowNum)

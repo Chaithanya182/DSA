@@ -1,3 +1,9 @@
+// Longest Consecutive Sequence Key Note:
+// - Find the longest run of consecutive integers in an unsorted array
+// - Efficient solution uses a HashSet and expands from the sequence start
+// - Time: O(n), Space: O(n)
+// - Key insight: only begin expansion when current number is the start of a sequence
+
 import java.util.*;
 
 class Solution {

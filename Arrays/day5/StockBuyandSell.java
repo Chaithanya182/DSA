@@ -1,13 +1,9 @@
-// This is day 5 of 100 days of java
-
-// for the past 4 days i have been solving patterns math basics , basic recursion , hashing,sorting algorithms,and array easy
-
-// today im doing array medium problems these problems i have solved mostlu once but not confident and now doing consistentl
-
-// this is day 5 
-
-// Apil 4 2026
-
+// Stock Buy and Sell Key Note:
+// - Goal: maximize profit with a single buy and sell
+// - Track the minimum price seen so far while iterating
+// - Compute profit at each day as current price - minPrice
+// - Update maxProfit using the best profit seen so far
+// - Time: O(n), Space: O(1)
 
 import java.util.*;
 
