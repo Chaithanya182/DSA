@@ -1,0 +1,271 @@
+===========================================================
+   SMARTCART — INTERVIEW SCRIPT (Say It Naturally!)
+===========================================================
+NOTE: Don't memorize word-for-word. Learn the flow and say
+      it in YOUR own voice. These are guides, not lines.
+===========================================================
+
+
+-----------------------------------------------------------
+SCENE 1: "Tell me about yourself / your projects"
+-----------------------------------------------------------
+
+"So one of the projects I'm really proud of is SmartCart —
+a full-stack e-commerce platform I built using the MERN stack.
+
+The idea was to build something real — not just a TODO app —
+but an actual end-to-end shopping platform that handles
+everything from product browsing, cart management, order
+placement, and even live payment processing.
+
+The app has three parts:
+  - A React frontend for customers to shop
+  - A separate React admin panel to manage products and orders
+  - A Node.js + Express backend API connected to MongoDB
+
+And the whole thing is deployed live on Vercel."
+
+[PAUSE — let them respond or ask a follow-up]
+
+
+-----------------------------------------------------------
+SCENE 2: "What are the key features?"
+-----------------------------------------------------------
+
+"Sure! On the customer side:
+  - Users can browse products, filter by category, sort by price,
+    and search by keyword.
+  - They can add items to cart — even without logging in, the cart
+    syncs once they log in.
+  - At checkout, they can pay using Stripe, Razorpay, or
+    Cash on Delivery — so three full payment flows.
+  - After placing an order, they can track its status in real time
+    from 'Order Placed' all the way to 'Delivered'.
+
+On the admin side:
+  - Admins can add new products with up to 4 images — those
+    images are uploaded to Cloudinary via Multer.
+  - They can view all orders, and update the order status manually."
+
+
+-----------------------------------------------------------
+SCENE 3: "Walk me through the architecture"
+-----------------------------------------------------------
+
+"Sure. The backend is a REST API built with Express.js.
+It has four main route groups:
+
+  /api/user    — handles login, register, admin login
+  /api/product — CRUD for products (add, list, remove, single)
+  /api/cart    — add to cart, update cart, get cart
+  /api/order   — place order, verify payment, list orders
+
+The database is MongoDB with three Mongoose models:
+User, Product, and Order.
+
+The frontend is React with Vite and TailwindCSS.
+I used React Context API for global state — products,
+cart data, and the user token are all in a single ShopContext.
+
+For image uploads, I use Multer to handle the multipart
+form data on the server, then push the files to Cloudinary
+and store the CDN URLs in MongoDB."
+
+
+-----------------------------------------------------------
+SCENE 4: "How does authentication work?"
+-----------------------------------------------------------
+
+"I implemented JWT-based authentication.
+
+When a user registers, their password is hashed using bcryptjs
+with a salt of 10 rounds before storing in MongoDB.
+
+When they log in, I compare the plain text password to the
+hash using bcrypt.compare(). If it matches, I create a JWT
+token with the user's MongoDB _id as the payload using
+jwt.sign(), and send it back to the frontend.
+
+On the frontend, this token is stored in app state. Every
+request to a protected endpoint sends this token in the
+request headers.
+
+On the backend, my authUser middleware intercepts the request,
+verifies the JWT using jwt.verify(), extracts the userId from
+the payload, and attaches it to req.body before the next handler.
+
+For the admin panel, I have a separate adminAuth middleware.
+The admin logs in with an email and password stored in
+environment variables — no database involved for admin accounts."
+
+
+-----------------------------------------------------------
+SCENE 5: "How does payment work — Stripe specifically?"
+-----------------------------------------------------------
+
+"Great question. So when the user selects Stripe and confirms
+the order:
+
+  1. The frontend sends a POST request to /api/order/stripe
+     with the cart items, address, and total amount.
+
+  2. The backend first creates the order in MongoDB with
+     payment set to false — this is important because we
+     don't know yet if they'll actually pay.
+
+  3. Then I build a line_items array for Stripe — each cart
+     item becomes a price_data object with name and
+     unit_amount (price multiplied by 100 because Stripe
+     uses the smallest currency unit like paise or cents).
+     I also add a delivery charge as a separate line item.
+
+  4. I create a Stripe Checkout Session using the Stripe SDK
+     and get back a session URL.
+
+  5. The frontend redirects the user to that Stripe-hosted
+     payment page.
+
+  6. After payment, Stripe redirects back to my /verify
+     route with success=true and the orderId in the URL.
+
+  7. My verifyStripe handler then updates the order's payment
+     field to true and clears the user's cart.
+
+Razorpay follows a similar pattern but uses their SDK and
+the order receipt ID for mapping."
+
+
+-----------------------------------------------------------
+SCENE 6: "Why did you store cart inside the User model?"
+-----------------------------------------------------------
+
+"That was a deliberate design decision early on.
+
+The cart is always accessed in the context of a specific user —
+you never query carts independently. So embedding it as an
+object inside the User document means I avoid an extra
+database round trip every time I need cart data.
+
+It looks like: cartData: { productId: { size: quantity } }
+
+One important Mongoose detail here — I used { minimize: false }
+on the schema. By default Mongoose strips empty nested objects.
+So if cartData is {}, Mongoose would delete it from the
+document. minimize: false prevents that — otherwise cart
+operations would break after an order clears the cart."
+
+
+-----------------------------------------------------------
+SCENE 7: "What would you improve?"
+-----------------------------------------------------------
+
+"Honestly, a few things.
+
+First, my JWT tokens have no expiry time set. In production,
+tokens should expire — say, 7 days — and you'd use refresh
+tokens to silently renew sessions.
+
+Second, the admin authentication is very basic — it checks
+against hardcoded environment variables rather than a proper
+admin user record with a role field in the database. That's
+not scalable if you have multiple admins.
+
+Third, the cart being stored in the User document works fine
+at this scale, but for a real production app I'd move it to
+a separate Cart collection with an indexed userId — this
+makes cart operations faster and doesn't require reading/
+writing the entire user document every time.
+
+Fourth, there's no inventory tracking — if two users add the
+last item at the same time, both orders go through. I'd add
+stock quantity to the product model and use atomic updates."
+
+
+-----------------------------------------------------------
+SCENE 8: "How would you scale this?"
+-----------------------------------------------------------
+
+"A few things I'd tackle:
+
+  - Add Redis caching for the product list — it doesn't change
+    often, so fetching from cache instead of MongoDB every time
+    would reduce DB load significantly.
+
+  - Paginate the product listing API — right now it fetches all
+    products at once which won't scale.
+
+  - Replace the Stripe redirect-based verification with Stripe
+    Webhooks — webhooks are server-to-server so they're
+    reliable even if the browser redirect fails.
+
+  - Add a message queue like BullMQ for order processing so
+    heavy operations don't block the request cycle.
+
+  - Add rate limiting with express-rate-limit to prevent abuse
+    on auth endpoints."
+
+
+-----------------------------------------------------------
+SCENE 9: "What was your biggest challenge?"
+-----------------------------------------------------------
+
+"The payment integration was definitely the trickiest part.
+
+The challenge with Stripe and Razorpay isn't just calling an API —
+it's managing the order state reliably across two systems.
+
+Because the user could close the browser mid-payment, I had to
+think through: what state is the order in? When do I clear the
+cart? How do I know payment actually succeeded?
+
+The solution was to create the order in DB first with payment: false,
+then verify it only after getting a confirmed success signal back.
+For COD, the order goes through immediately but payment stays false
+since it'll be collected on delivery. Each method has a slightly
+different confirmation mechanism and I had to handle each carefully."
+
+
+-----------------------------------------------------------
+SCENE 10: "How do you prevent users from accessing other users' data?"
+-----------------------------------------------------------
+
+"Good question. I ensure that the userId used in protected queries
+always comes from the verified JWT token — not from the request body.
+
+In my authUser middleware, after verifying the token with jwt.verify(),
+I do req.body.userId = token_decode.id. So even if a malicious user
+sends a different userId in the request body, my middleware overwrites
+it with their actual authenticated identity before the controller runs.
+
+This means a user can only ever access their own cart and orders —
+they can't pull another user's data by manipulating the request."
+
+
+===========================================================
+QUICK NUMBERS TO REMEMBER
+===========================================================
+
+  - 3 MongoDB models     : User, Product, Order
+  - 4 API route groups   : /user, /product, /cart, /order
+  - 3 payment methods    : Stripe, Razorpay, COD
+  - 2 auth middlewares   : authUser (JWT), adminAuth (env vars)
+  - 3 deployments        : frontend, admin, backend on Vercel
+  - 2 React apps         : frontend (port 5173), admin (port 5174)
+  - 1 backend port       : 4000
+
+
+===========================================================
+POWER PHRASES TO USE IN INTERVIEW
+===========================================================
+
+  "That was a deliberate design decision because..."
+  "In hindsight, I'd improve this by..."
+  "The tricky part here was managing state across two systems..."
+  "I used X over Y because at this scale, Y would add unnecessary overhead..."
+  "One thing I'd add in production is..."
+  "Good question — let me walk you through the flow..."
+
+
+===========================================================
+END OF SCRIPT
+===========================================================

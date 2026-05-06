@@ -1,0 +1,144 @@
+AWS -> Amazon web services 
+
+frontend (static) + restApis (compute) + database 
+
+for rest api deploysing ->
+we need compute services ->
+				Server oriented:
+						(Iaas)
+						 ec2(elastic compute cloud) -> provides the virtual servers for running application code
+						elb(elastic load balancer)   -> it is used to balance the load and distrubutes equally among all servers
+						ASG(Auto Scalling group) -> It is an automation service that is basically used to automatiicaly increase or decrease the sersers based on needs 
+				Serverless: (Faas)
+						  AWS Lambda-> just updload the server code automatically manages all of the things  paying as you go all of the tihngs 
+				Automanagement tool (Paas)->
+										Elastic Beanstalk -> it is automatically manages all things like creating ec2,elb,s3 and all its a platform as a service 		
+				Container orchestration -> meaning managing multiple microservices simultanesously 
+							ECS(Elastic Container Service) ->AWS-native container orchestration
+							EKS(Elatic Kubernaties Servie) -> Used by kubernaties 
+							Fargate -> serverless version of ECS
+Region  -> A geographic location (e.g. London, Mumbai, New York). AWS has ~26 regions.
+Availability Zone (AZ)  -> Multiple isolated data centers within a region
+
+Containers & Docker -> 
+	Container builds os,runtime,config,code
+	Run anywhere: local machine, cloud, data center
+	Docker is the most popular container standard
+	Elastic Beanstalk, ECS, EKS, and Fargate all support container images
+
+Database service ->
+
+3 types ->
+		Relational Databases -> It is uesd where transaction and consistency matter
+		RDS,Auroara
+		Non-Relational Databases ->
+		DynamoDb
+		
+		Analytical Databases
+			->For proecssing large info
+				->Aws Redshift,
+
+Front end ->
+        we can use ec2,elb -> but more operaional thing it is.
+	best s3(Simple Storage Service)-> it is used to upload static files in the s3 and we can host it
+	ROUTE 53-> It is a Domain Name System(DNS)
+	Cloud Front(CDN) content delivery netwrork) -> used to deploy across multiple severss
+
+Storage services ->
+		EBS -> Elastic Block Storage -> used for the non changable code -> attached to ec2
+		EFS -> Elastic File Storage -> used to share across multiple ec2 servers
+		S3(Simple Storage Service) -> It is used to store all different objects 
+
+CloudWatch -.>  Metrics (CPU, memory, custom app metrics
+
+Security - Networking
+Virtual Private Cloud(VPC) -> Isolates your resources from other AWS customers on shared infrastructure
+					   ->Define traffic rules using route tables
+TypeAccess 
+Public Subnet  ->  Accessible from the internet (e.g. web servers, load balancers)  
+Private Subnet->NOT accessible from internet (e.g. databases, internal services)
+
+
+Cloud Computing -> 
+
+	Cloud computing means delivering computing services like servers, storage, databases, networking, and software over the internet on demand.
+Types-> public,private,Hybrid cloud
+servies -> Iaas(ec2),Paas(elastic beanstalk),Saas(email),Faas(aws lambda)
+
+Region -> Graphicall locaitn of datacenter
+Availability Zone(AZ) -> Isolated data centers within a region.
+
+“A Security Group in AWS acts as a virtual firewall that controls inbound and outbound traffic for AWS resources like EC2 instances.It allows developers to define rules specifying which traffic is permitted based on protocol, port number, and source. Security Groups are stateful, meaning return traffic is automatically allowed if the incoming request is permittexed.”
+ 
+What is IAM?
+Identity and Access Mangaement 
+| Component | Purpose                      |
+| Users     | Individual people/accounts   |
+| Groups    | Collection of users          |
+| Roles     | Temporary access permissions |
+| Policies  | Permission rules             |
+
+
+ 		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	
+			

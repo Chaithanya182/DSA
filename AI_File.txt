@@ -1,0 +1,72 @@
+
+
+AI-> ABILITY OF A SYSTEM TO MAKE DECISIONS LIKE HUMAN (PATTERN RECOGNITON,IMAGE RECOGNITION,SPEECH RECOGNITION
+
+machine learning -> subset of ai it is the where model  learns and builded from using various algorithms
+tyepes -> supervised ml -> tained on label data -> classification-> if there are certain groups of outpurs fixed  -> binary classificatin  logestic regressoin , k nearsst neighbers ,random forest,XG Boost
+only 2 , multi classification more than 2  , regression -> The output is in numerical type -> lineaer regression 
+Unsupervised ml -> it is done on unlabelled data -> herewe use the concept of clustering Clustering means grouping similar data together types -> partition clustering-> one data point belong to one class, hierarchial clusrering->one belong to multiple classes
+Reinforment learning -> agent interescts with the environment and baed on feedback it works where positive means it move towards it negative means move way from it 
+
+this is ml for structued data 
+
+
+for unstructured data -> deep learning is best uses 
+
+dl maining uses formats of neurons of the brain -> it contains input layer , hidden layer and finally output layer.
+types -> fnn(feed forward neural netwoek)Feed Forward Neural Network is the simplest type of neural network. Data moves only in one direction:
+		CNN(Convocational Neural Netwokt)- > mainly for using images
+		RNN recurrent neural netwotk -> remembers previous inouts also
+		LSTM(Long Short Term Memory) ->LSTM is an improved version of RNN. Long-term dependency problems
+		
+Transformers Self Attention
+
+Transformers are advanced deep learning architectures mainly used in: 
+
+Natural Language Processing (NLP) two parts natural language understanding(nlu) , natural language generattoin(nlg) Tokenization Tokenization means splitting text into smaller units.
+
+		Large Language Models (LLMs) ->LLMs are massive NLP models trained on huge datasets.
+
+Generative AI -> Its an branch of ai that have ability to create new data
+Agentic ai-> its is ai type of ai that can be able to plan , make tasks , call tools and complete without any human intervwntion only this works towards goal oriented ones
+eg : mordern using n8n ai auomate workflow , bolt.new
+
+RAG -> Retrival Augumented Generation 
+
+
+As the name says 3 steps -> 
+	Retrival -> It is used to get the relevent informatoin 
+	Augumented -> It can feed to prompt for ai 
+	Generation ->  llm generate the content 
+
+By using rag we can fetch relewent information ->  like realtime fetching ,reducing halucination etc
+Chuking -> splitting data into smaller parts 
+
+vector db -> normal db stores data as a normal -> vector db stores semantic meanings of tehm 
+
+
+Prompt engineering -> 
+	It is the process of 
+				-> Designing
+				->Optimising
+				->Structuring prompts in a best way to make the ai to understand it 
+	best is provide -> Role, Task,Context,Constraints,Output Format etc
+
+types -> zero shot prompting -> give without examples
+		one shot prompting -> give a example 
+		fewshot prompting -> multiple examples
+		role promptung etc
+System Prompt -> Controls AI behavior globally. ->You are a professional coding assistant.
+
+User Prompt -> Actual user request. -> Explain JWT authentication.
+
+
+
+
+
+
+
+
+
+
+
